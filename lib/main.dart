@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui';
 
 void main() {
@@ -145,24 +146,49 @@ class _BiodataScreenState extends State<BiodataScreen> with TickerProviderStateM
         children: [
           if (isMobile) const SizedBox(height: 20),
           Text(
-            'M. Rizky',
+            'Muhammad Rizky',
             style: GoogleFonts.outfit(
               fontSize: 42,
               fontWeight: FontWeight.bold,
               letterSpacing: 1.2,
             ),
           ),
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.pinkAccent.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              'NIM: 231250000522',
+              style: GoogleFonts.outfit(
+                fontSize: 16,
+                color: Colors.pinkAccent,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
           Text(
-            'Fullstack Developer & UI Enthusiast',
+            'R2 Sistem Informasi',
             style: GoogleFonts.outfit(
               fontSize: 18,
-              color: Colors.pinkAccent,
+              color: Colors.white70,
               fontWeight: FontWeight.w500,
+            ),
+          ),
+          Text(
+            'Pemrograman Perangkat Bergerak',
+            style: GoogleFonts.outfit(
+              fontSize: 16,
+              color: Colors.white54,
+              fontStyle: FontStyle.italic,
             ),
           ),
           const SizedBox(height: 20),
           Text(
-            'Passionate about creating beautiful, functional, and interactive user experiences. Student at SMT 6 exploring the world of Flutter and Cloud Computing.',
+            'Mahasiswa Sistem Informasi yang antusias dalam pengembangan aplikasi mobile menggunakan Flutter. Berfokus pada penciptaan solusi digital yang inovatif dan user-friendly untuk tugas perkuliahan maupun proyek nyata.',
             textAlign: isMobile ? TextAlign.center : TextAlign.start,
             style: const TextStyle(height: 1.6, color: Colors.white70),
           ),
@@ -173,19 +199,19 @@ class _BiodataScreenState extends State<BiodataScreen> with TickerProviderStateM
             children: [
               SkillChip(label: 'Flutter'),
               SkillChip(label: 'Dart'),
-              SkillChip(label: 'Javascript'),
+              SkillChip(label: 'UI/UX Design'),
               SkillChip(label: 'Vercel'),
-              SkillChip(label: 'Firebase'),
+              SkillChip(label: 'Sistem Informasi'),
             ],
           ),
           const SizedBox(height: 40),
           Row(
             mainAxisAlignment: isMobile ? MainAxisAlignment.center : MainAxisAlignment.start,
             children: [
-              SocialButton(icon: FontAwesomeIcons.github, onPressed: () {}),
-              SocialButton(icon: FontAwesomeIcons.linkedin, onPressed: () {}),
-              SocialButton(icon: FontAwesomeIcons.instagram, onPressed: () {}),
-              SocialButton(icon: FontAwesomeIcons.envelope, onPressed: () {}),
+              SocialButton(icon: FontAwesomeIcons.github, url: 'https://github.com/mrizkymxx'),
+              SocialButton(icon: FontAwesomeIcons.linkedin, url: 'https://www.linkedin.com/in/muhammad-rizky/'),
+              SocialButton(icon: FontAwesomeIcons.instagram, url: 'https://www.instagram.com/mrizkymxx/'),
+              SocialButton(icon: FontAwesomeIcons.envelope, url: 'mailto:muhamrizky00@gmail.com'),
             ],
           ),
         ],
@@ -227,8 +253,8 @@ class SkillChip extends StatelessWidget {
 
 class SocialButton extends StatefulWidget {
   final IconData icon;
-  final VoidCallback onPressed;
-  const SocialButton({super.key, required this.icon, required this.onPressed});
+  final String url;
+  const SocialButton({super.key, required this.icon, required this.url});
 
   @override
   State<SocialButton> createState() => _SocialButtonState();
@@ -236,6 +262,13 @@ class SocialButton extends StatefulWidget {
 
 class _SocialButtonState extends State<SocialButton> {
   bool _isHovered = false;
+
+  Future<void> _launchURL() async {
+    final Uri url = Uri.parse(widget.url);
+    if (!await launchUrl(url)) {
+      debugPrint('Could not launch ${widget.url}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +285,7 @@ class _SocialButtonState extends State<SocialButton> {
         child: IconButton(
           icon: Icon(widget.icon),
           color: _isHovered ? Colors.white : Colors.white70,
-          onPressed: widget.onPressed,
+          onPressed: _launchURL,
         ),
       ),
     );

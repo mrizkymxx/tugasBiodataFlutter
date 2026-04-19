@@ -40,3 +40,4 @@ app.*.map.json
 
 # Android Studio will create this file for Java resources in Android projects
 AndroidStudio/
+.vercel
