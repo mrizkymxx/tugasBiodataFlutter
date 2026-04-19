@@ -209,7 +209,7 @@ class _BiodataScreenState extends State<BiodataScreen> with TickerProviderStateM
             mainAxisAlignment: isMobile ? MainAxisAlignment.center : MainAxisAlignment.start,
             children: [
               SocialButton(icon: FontAwesomeIcons.github, url: 'https://github.com/mrizkymxx'),
-              SocialButton(icon: FontAwesomeIcons.linkedin, url: 'https://www.linkedin.com/in/muhammad-rizky/'),
+              SocialButton(icon: FontAwesomeIcons.linkedin, url: 'https://www.linkedin.com/in/muhammad-rizky-9b44aa305/'),
               SocialButton(icon: FontAwesomeIcons.instagram, url: 'https://www.instagram.com/mrizkymxx/'),
               SocialButton(icon: FontAwesomeIcons.envelope, url: 'mailto:muhamrizky00@gmail.com'),
             ],
